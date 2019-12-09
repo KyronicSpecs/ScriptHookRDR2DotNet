@@ -486,7 +486,7 @@ namespace RDR2
 			Function.Call((Hash)0x9030AD4B6207BFE8, _ped.Handle, animal.Handle, flag);
 		}
 
-		public void DriveToCoord(Vehicle vehicle, Vector3 pos, float speed, float radius = 6f, VehicleDrivingFlags drivingMode = VehicleDrivingFlags.Default)
+		public void DriveToCoord(Vehicle vehicle, Vector3 pos, float speed, float radius = 6f, VehicleDrivingFlags drivingMode = VehicleDrivingFlags.None)
 		{
 			Function.Call(Hash.TASK_VEHICLE_DRIVE_TO_COORD, _ped.Handle, vehicle.Handle, pos.X, pos.Y, pos.Z, speed,
 				radius, vehicle.Model.Hash, (int)drivingMode);

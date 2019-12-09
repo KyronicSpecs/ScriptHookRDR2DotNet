@@ -51,7 +51,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <!-- Global compilation settings -->
   <PropertyGroup>
-    <TargetExt>.asi</TargetExt>
+    <TargetExt>.dll</TargetExt>
     <TargetName>ScriptHookRDRDotNet</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

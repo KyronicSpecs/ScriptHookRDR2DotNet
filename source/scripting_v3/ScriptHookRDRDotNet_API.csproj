@@ -42,10 +42,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ScriptHookRDRDotNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8564999cffc18483, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\Debug\ScriptHookRDRDotNet.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -102,6 +98,7 @@
     <Compile Include="RDR2\Entities\Peds\RelationshipGroup.cs" />
     <Compile Include="RDR2\Entities\Peds\Tasks.cs" />
     <Compile Include="RDR2\Entities\Peds\TaskSequence.cs" />
+    <Compile Include="RDR2\Entities\Peds\VehicleDrivingFlags.cs" />
     <Compile Include="RDR2\Entities\Prop.cs" />
     <Compile Include="RDR2\Entities\Vehicles\Vehicle.cs" />
     <Compile Include="RDR2\Entities\Vehicles\VehicleClass.cs" />
@@ -126,7 +123,7 @@
     <Compile Include="RDR2\GlobalCollection.cs" />
     <Compile Include="RDR2\Handleable.cs" />
     <Compile Include="RDR2\Language.cs" />
-    <Compile Include="RDR2\MarkerType.cs" />
+    <!-- <Compile Include="RDR2\MarkerType.cs" /> -->
     <Compile Include="RDR2\Pickup.cs" />
     <Compile Include="RDR2\PickupType.cs" />
     <Compile Include="RDR2\Player.cs" />
@@ -145,10 +142,16 @@
     <Compile Include="RDR2\Weapons\WeaponCollection.cs" />
     <Compile Include="RDR2\Weapons\WeaponComponent.cs" />
     <Compile Include="RDR2\Weapons\WeaponTint.cs" />
-    <Compile Include="RDR2\Weather.cs" />
+    <!-- <Compile Include="RDR2\Weather.cs" /> -->
     <Compile Include="RDR2\WindowTitle.cs" />
     <Compile Include="RDR2\World.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ScriptHookRDRDotNet.vcxproj">
+      <Project>{ee620bcb-3c8c-4be8-88f4-924daaef304b}</Project>
+      <Name>ScriptHookRDRDotNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -135,11 +135,11 @@ namespace RDR2
 		{
 			int[] peds = new int[1024];
 			int entityCount = RDR2DN.NativeMemory.getAllPeds(peds, 1024);
-			List<Ped> Peds = new List<Ped>();
+			List<Ped> _peds = new List<Ped>();
 			for (int i = 0; i < entityCount; i++)
-				Peds.Add(new Ped(peds[i]));
+				_peds.Add(new Ped(peds[i]));
 
-			return Peds.ToArray();
+			return _peds.ToArray();
 		}
 		/// <summary>
 		/// This method is not fully tested. It uses a straight import from ScriptHookRDR2.dll, and if it is returning 0, then it is *probably* a SHRDR2 issue or just you is stupid?
@@ -149,11 +149,11 @@ namespace RDR2
 			int[] vehs = new int[1024];
 			int entityCount = RDR2DN.NativeMemory.getAllVehicles(vehs, 1024);
 
-			List<Vehicle> Vehs = new List<Vehicle>();
+			List<Vehicle> _vehs = new List<Vehicle>();
 			for (int i = 0; i < entityCount; i++)
-				Vehs.Add(new Vehicle(vehs[i]));
+				_vehs.Add(new Vehicle(vehs[i]));
 
-			return Vehs.ToArray();
+			return _vehs.ToArray();
 		}
 		/// <summary>
 		/// This method is not fully tested. It uses a straight import from ScriptHookRDR2.dll, and if it is returning 0, then it is *probably* a SHRDR2 issue.
@@ -163,11 +163,11 @@ namespace RDR2
 			int[] props = new int[1024];
 			int entityCount = RDR2DN.NativeMemory.getAllObjects(props, 1024);
 
-			List<Prop> Prop = new List<Prop>();
+			List<Prop> _props = new List<Prop>();
 			for (int i = 0; i < entityCount; i++)
-				Prop.Add(new Prop(props[i]));
+				_props.Add(new Prop(props[i]));
 
-			return Prop.ToArray();
+			return _props.ToArray();
 		}
 
 

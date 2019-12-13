@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Collections.Generic;
 
 namespace RDR2DN
 {
@@ -40,11 +41,11 @@ namespace RDR2DN
 		/// <summary>
 		/// Internal script task which holds all data necessary for a script function call.
 		/// </summary>
-		class NativeTask : IScriptTask
+		public class NativeTask : IScriptTask
 		{
-			internal ulong Hash;
-			internal ulong[] Arguments;
-			internal unsafe ulong* Result;
+            public ulong Hash;
+            public ulong[] Arguments;
+            public unsafe ulong* Result;
 
 			public void Run()
 			{
@@ -159,7 +160,7 @@ namespace RDR2DN
 		/// </summary>
 		/// <param name="args"></param>
 		/// <returns></returns>
-		static ulong[] ConvertPrimitiveArguments(object[] args)
+		internal static ulong[] ConvertPrimitiveArguments(object[] args)
 		{
 			var result = new ulong[args.Length];
 			for (int i = 0; i < args.Length; ++i)
@@ -243,9 +244,10 @@ namespace RDR2DN
 				NativePush64(arg);
 			return NativeCall();
 		}
+
 		public static ulong* InvokeInternal(ulong hash, params object[] args)
 		{
 			return InvokeInternal(hash, ConvertPrimitiveArguments(args));
-		}
-	}
+		}  
+    }
 }

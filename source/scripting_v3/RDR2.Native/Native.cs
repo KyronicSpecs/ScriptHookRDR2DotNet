@@ -10,6 +10,9 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Runtime.InteropServices;
 using RDR2.Math;
+using System.Collections.Generic;
+using RDR2DN;
+using static RDR2DN.NativeFunc;
 
 namespace RDR2.Native
 {
@@ -554,4 +557,66 @@ namespace RDR2.Native
 			throw new InvalidCastException(string.Concat("Unable to cast native value to object of type '", type, "'"));
 		}
 	}
+
+
+
+    public class CallCollection
+    {
+        private List<NativeTask> taskList;
+
+        public CallCollection()
+        {
+            taskList = new List<NativeTask>();
+        }
+
+        public void Call(Hash hash, params InputArgument[] arguments)
+        {
+            var task = new NativeTask();
+            task.Hash = (ulong)hash;
+
+            ulong[] args = new ulong[arguments.Length];
+            for (int i = 0; i < arguments.Length; ++i)
+            {
+                args[i] = arguments[i].data;
+            }
+
+            task.Arguments = args;
+
+            taskList.Add(task);
+        }
+
+        public int Execute()
+        {
+            var taskColl = new NativeTaskCollection();
+            taskColl._tasks = new NativeTask[taskList.Count];
+
+            for (int i = 0; i < taskList.Count; i++)
+            {
+                taskColl._tasks[i] = taskList[i];
+            }
+
+            ScriptDomain.CurrentDomain.ExecuteTask(taskColl);
+            return taskList.Count;
+        }
+
+
+        /// <summary>
+        /// Internal script task responsible for executing the script function.
+        /// </summary>
+        internal unsafe class NativeTaskCollection : IScriptTask
+        {
+            internal NativeTask[] _tasks;
+
+            public void Run()
+            {
+                lock (_tasks)
+                {
+                    for (int i = 0; i < _tasks.Length; i++)
+                    {
+                        _tasks[i].Run();
+                    }
+                }
+            }
+        }
+    }
 }

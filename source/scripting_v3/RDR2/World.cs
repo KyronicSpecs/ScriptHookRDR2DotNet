@@ -6,6 +6,7 @@
 using RDR2.Math;
 using RDR2.Native;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 
@@ -132,27 +133,41 @@ namespace RDR2
 		/// </summary>
 		public static Ped[] GetAllPeds()
 		{
-			int[] peds = new int[] { };
-			RDR2DN.NativeMemory.getAllPeds(peds, 150);
-			return Array.ConvertAll(peds, handle => new Ped(handle));
+			int[] peds = new int[1024];
+			int entityCount = RDR2DN.NativeMemory.getAllPeds(peds, 1024);
+			List<Ped> _peds = new List<Ped>();
+			for (int i = 0; i < entityCount; i++)
+				_peds.Add(new Ped(peds[i]));
+
+			return _peds.ToArray();
 		}
 		/// <summary>
-		/// This method is not fully tested. It uses a straight import from ScriptHookRDR2.dll, and if it is returning 0, then it is *probably* a SHRDR2 issue.
+		/// This method is not fully tested. It uses a straight import from ScriptHookRDR2.dll, and if it is returning 0, then it is *probably* a SHRDR2 issue or just you is stupid?
 		/// </summary>
 		public static Vehicle[] GetAllVehicles()
 		{
-			int[] vehs = new int[] { };
-			RDR2DN.NativeMemory.getAllVehicles(vehs, 150);
-			return Array.ConvertAll(vehs, handle => new Vehicle(handle));
+			int[] vehs = new int[1024];
+			int entityCount = RDR2DN.NativeMemory.getAllVehicles(vehs, 1024);
+
+			List<Vehicle> _vehs = new List<Vehicle>();
+			for (int i = 0; i < entityCount; i++)
+				_vehs.Add(new Vehicle(vehs[i]));
+
+			return _vehs.ToArray();
 		}
 		/// <summary>
 		/// This method is not fully tested. It uses a straight import from ScriptHookRDR2.dll, and if it is returning 0, then it is *probably* a SHRDR2 issue.
 		/// </summary>
 		public static Prop[] GetAllProps()
 		{
-			int[] objs = new int[] { };
-			RDR2DN.NativeMemory.getAllObjects(objs, 150);
-			return Array.ConvertAll(objs, handle => new Prop(handle));
+			int[] props = new int[1024];
+			int entityCount = RDR2DN.NativeMemory.getAllObjects(props, 1024);
+
+			List<Prop> _props = new List<Prop>();
+			for (int i = 0; i < entityCount; i++)
+				_props.Add(new Prop(props[i]));
+
+			return _props.ToArray();
 		}
 
 
